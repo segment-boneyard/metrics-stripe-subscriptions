@@ -3,7 +3,7 @@
 
 A [Stripe](https://stripe.com) [subscriptions](https://github.com/stripe-cohort) plugin for [segmentio/dashboards](https://github.com/segmentio/dashboards).
 
-Use this plugin to visualize your active subscriptions over time, and your monthly recurring revenue.
+Use this plugin to visualize Stripe subscription and MRR changes over time.
 
 ![](https://f.cloud.github.com/assets/658544/2361169/09325510-a62e-11e3-8f49-e327e89595cd.png)
 
