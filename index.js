@@ -173,7 +173,7 @@ Subscriptions.prototype.monthlyPlans = function (customers, results) {
   Object.keys(plans).forEach(function (name) {
     var id = plans[name];
 
-    var oneMonthAgoSubscriptions = self.activeSubscriptions(customers, oneMonthAgo, yesterday).plan(id);
+    var oneMonthAgoSubscriptions = self.activeSubscriptions(customers, oneMonthAgo, now).plan(id);
     oneMonthAgoPlans[name] = {
       'active MRR': oneMonthAgoSubscriptions.mrr(),
       'active subscriptions': oneMonthAgoSubscriptions.count()
