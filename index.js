@@ -106,10 +106,10 @@ Subscriptions.prototype.daily = function (customers, results) {
  */
 
 Subscriptions.prototype.weekly = function (customers, results) {
-  var yesterday = Dates.day.shift(new Date(), -1);
+  var now = new Date();
 
-  var oneWeekAgo = Dates.day.shift(yesterday, -7);
-  var oneWeekAgoSubscriptions =  this.activeSubscriptions(customers, oneWeekAgo, yesterday);
+  var oneWeekAgo = Dates.day.shift(now, -7);
+  var oneWeekAgoSubscriptions =  this.activeSubscriptions(customers, oneWeekAgo, now);
   results['active new MRR 0-1 weeks ago'] = oneWeekAgoSubscriptions.mrr();
   results['active new subscriptions 0-1 weeks ago'] = oneWeekAgoSubscriptions.count();
 
@@ -127,10 +127,10 @@ Subscriptions.prototype.weekly = function (customers, results) {
  */
 
 Subscriptions.prototype.monthly = function (customers, results) {
-  var yesterday = Dates.day.shift(new Date(), -1);
+  var now = new Date();
 
-  var oneMonthAgo = Dates.month.shift(yesterday, -1);
-  var oneMonthAgoSubscriptions =  this.activeSubscriptions(customers, oneMonthAgo, yesterday);
+  var oneMonthAgo = Dates.month.shift(now, -1);
+  var oneMonthAgoSubscriptions =  this.activeSubscriptions(customers, oneMonthAgo, now);
   results['active new MRR 0-1 months ago'] = oneMonthAgoSubscriptions.mrr();
   results['active new subscriptions 0-1 months ago'] = oneMonthAgoSubscriptions.count();
 
@@ -164,8 +164,8 @@ Subscriptions.prototype.monthlyPlans = function (customers, results) {
   var self = this;
   var plans = this.options.plans;
 
-  var yesterday = Dates.day.shift(new Date(), -1);
-  var oneMonthAgo = Dates.month.shift(yesterday, -1);
+  var now = new Date();
+  var oneMonthAgo = Dates.month.shift(now, -1);
   var twoMonthsAgo = Dates.month.shift(oneMonthAgo, -1);
 
   var oneMonthAgoPlans = {};
