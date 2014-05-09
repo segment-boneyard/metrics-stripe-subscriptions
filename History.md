@@ -1,4 +1,9 @@
 
+n.n.n / 2014-05-09 
+==================
+
+  * reverting smoothing --- we dont want smoothing in this lib
+
 n.n.n / 2014-05-08 
 ==================
 
