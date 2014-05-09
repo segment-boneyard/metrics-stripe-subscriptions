@@ -225,8 +225,36 @@ Subscriptions.prototype.totalPlans = function (customers, results) {
 Subscriptions.prototype.activeSubscriptions = function (customers, start, end) {
   if (this.options.filter) customers = customers.filter(this.options.filter);
   var subscriptions;
-  if (start && end) subscriptions = customers.subscriptions(start, end);
+  if (start && end) subscriptions = customers.subscriptions(floor(start), ceil(end));
   else subscriptions = customers.subscriptions();
   subscriptions = subscriptions.active().paid();
   return subscriptions;
 };
+
+/**
+ * Floor the `date` to the nearest day,
+ * while keeping in the same locale
+ * (unlike UTC'ing like Dates.day.floor).
+ */
+
+function floor (date) {
+  date = new Date(date);
+  date.setHours(0);
+  date.setMinutes(0);
+  date.setSeconds(0);
+  return date;
+}
+
+/**
+ * Floor the `date` to the nearest day,
+ * while keeping in the same locale
+ * (unlike UTC'ing like Dates.day.floor).
+ */
+
+function ceil (date) {
+  date = new Date(date);
+  date.setHours(23);
+  date.setMinutes(59);
+  date.setSeconds(59);
+  return date;
+}
