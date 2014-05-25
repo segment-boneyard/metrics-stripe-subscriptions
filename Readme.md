@@ -9,7 +9,7 @@ Use this plugin to visualize Stripe subscriptions over time.
 
 ## Installation
 
-    $ npm install metrics-stripe-subscriptions
+    $ npm install metrics-stripe-subscriptions 
 
 ## Quickstart
 
