@@ -90,7 +90,7 @@ function daily (metrics, subscriptions) {
   for (var ago = 7; ago >= 0; ago -= 1) {
     var start = Dates.day.shift(today, -ago);
     var end = Dates.day.shift(today, -ago+1);
-    var filtered = subscriptions.started(start, end);
+    var filtered = subscriptions.started(floor(start), end);
     numbers.push(filtered.count());
     amounts.push(filtered.mrr());
   }
