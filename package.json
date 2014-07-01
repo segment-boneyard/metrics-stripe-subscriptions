@@ -1,6 +1,6 @@
 {
   "name": "metrics-stripe-subscriptions",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": "git://github.com/segmentio/metrics-stripe-subscriptions.git",
   "description": "Stripe subscriptions plugin for segmentio/metrics",
   "keywords": [
@@ -13,6 +13,6 @@
     "date-math": "0.0.1",
     "debug": "^0.8.1",
     "ms": "^0.6.2",
-    "stripe-cohort": "0.0.1"
+    "stripe-cohort": "^0.0.2"
   }
 }
