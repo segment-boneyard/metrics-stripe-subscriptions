@@ -35,81 +35,43 @@ function subscriptions (key, options) {
 
       // by time
       var today = new Date();
-      set(metrics, subscriptions, plans, 'all time', new Date(0), today);
-      set(metrics, subscriptions, plans, 'today', floor(today), today);
-      set(metrics, subscriptions, plans, 'yesterday', Dates.day.shift(today, -1), today);
-      set(metrics, subscriptions, plans, '2 days ago', Dates.day.shift(today, -2), today);
-      set(metrics, subscriptions, plans, 'last week', Dates.week.shift(today, -1), today);
-      set(metrics, subscriptions, plans, '2 weeks ago', Dates.week.shift(today, -2), Dates.week.shift(today, -1));
-      set(metrics, subscriptions, plans, 'last month', Dates.month.shift(today, -1), today);
-      set(metrics, subscriptions, plans, '2 months ago', Dates.month.shift(today, -2), Dates.month.shift(today, -1));
+      var start = new Date(0);
 
-      // daily
-      daily(metrics, subscriptions);
+      // last 30 days
+      for (var i = 0; i <= 30; i += 1)
+        set(metrics, subscriptions, start, Dates.day.shift(today, -i));
+      
+      // last 52 weeks
+      for (var i = 1; i <= 52; i += 1)
+        set(metrics, subscriptions, start, Dates.week.shift(today, -i));
+
+      // last 10 years
+      for (var i = 1; i <= 10; i += 1)
+        set(metrics, subscriptions, start, Dates.year.shift(today, -i));      
     });
   };
 }
 
 /**
- * Set metrics for the given `key` and time interval.
+ * Set subscription metrics from `start` to `end`.
  *
- * @param {Metrics} metrics
- * @param {Array|Charge} subscriptions
- * @param {String} key
- * @param {Object} plans
- * @param {Date} start
- * @param {Date} end
+ * @param {Metrics} metrics                    the metrics instance
+ * @param {Array|Subscription} subscriptions   the entire list of stripe charges
+ * @param {Array|Plan} plans                   a list of the plans
+ * @param {Date} start                         the day to start counting
+ * @param {Date} end                           the day to end the count
  */
 
-function set (metrics, subscriptions, plans, key, start, end) {
+
+function set (metrics, subscriptions, plans, start, end) {
   subscriptions = subscriptions.started(start, end);
-  metrics.set('stripe subscriptions ' + key, subscriptions.count());
-  metrics.set('stripe subscriptions mrr ' + key, subscriptions.mrr());
+  metrics.set('stripe subscriptions', subscriptions.count(), end);
+  metrics.set('stripe subscriptions mrr', subscriptions.mrr(), end);
 
   Object.keys(plans).forEach(function (name) {
     var id = plans[name];
     var s = subscriptions.plan(id);
-    metrics.set('stripe ' + name + ' subscriptions ' + key, s.count());
-    metrics.set('stripe ' + name + ' subscriptions mrr ' + key, s.mrr());
+    metrics.set('stripe ' + name + ' subscriptions', s.count(), end);
+    metrics.set('stripe ' + name + ' subscriptions mrr', s.mrr(), end);
   });
-}
-
-/**
- * Get the daily subscription counts for the last week
- *
- * @param {Array|Metric} metrics
- * @param {Array|Charge} subscriptions
- */
-
-function daily (metrics, subscriptions) {
-  var today = new Date();
-
-  var numbers = [];
-  var amounts = [];
-
-  for (var ago = 7; ago >= 0; ago -= 1) {
-    var start = Dates.day.shift(today, -ago);
-    var end = Dates.day.shift(today, -ago+1);
-    var filtered = subscriptions.started(floor(start), end);
-    numbers.push(filtered.count());
-    amounts.push(filtered.mrr());
-  }
-
-  metrics.set('stripe subscriptions last week', numbers);
-  metrics.set('stripe subscription mrr last week', amounts);
-}
-
-
-/**
- * Floor the `date` to the nearest day,
- * while keeping in the same locale
- * (unlike UTC'ing like Dates.day.floor).
- */
-
-function floor (date) {
-  date = new Date(date);
-  date.setHours(0);
-  date.setMinutes(0);
-  date.setSeconds(0);
-  return date;
 }
