@@ -42,35 +42,12 @@ function filter (customer) {
 
 ## Metrics
 
-The metrics exposed by this plugin are divided by date granularity.
+The metrics exposed by this plugin are:
 
-Daily:
-- `stripe subscriptions today` - the number of subscriptions today
-- `stripe subscription mrr today` - the amount subscription mrr today
-- `stripe subscriptions yesterday` - the number of subscriptions yesterday
-- `stripe subscription mrr yesterday` - the amount subscription mrr yesterday
-- `stripe subscriptions 2 days ago` - the number of subscriptions 2 days ago
-- `stripe subscription mrr 2 days ago` - the amount subscription mrr 2 days ago
+- `stripe subscriptions` - the number of subscriptions
+- `stripe subscriptions mrr` - the monthly recurring revenue amount representing the subscriptions
 
-Weekly:
-- `stripe subscriptions past week` - the number of subscriptions last week
-- `stripe subscription mrr past week` - total subscription mrr last week
-- `stripe subscriptions 2 weeks ago` - the number of subscriptions 2 weeks ago
-- `stripe subscription mrr 2 weeks ago` - total subscription mrr 2 weeks ago
-
-Monthly:
-- `stripe subscriptions past month` - the number of subscriptions last month
-- `stripe subscription mrr past month` - total subscription mrr last month
-- `stripe subscriptions 2 months ago` - the number of subscriptions 2 months ago
-- `stripe subscription mrr 2 months ago` - total subscription mrr 2 months ago
-
-Total: 
-- `stripe subscriptions` - total amount of Stripe subscriptions
-- `stripe subscription mrr` - total amount subscription mrr
-
-Weekly Sparkline: 
-- `stripe subscriptions last week` - an array of subscriptions in the past 7 days
-- `stripe subscription mrr last week` - an array of subscription amounts in the past 7 days
+and are calculated for the last 30 days, last 52 weeks, and last 10 years.
 
 ## License
 
