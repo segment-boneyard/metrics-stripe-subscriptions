@@ -39,15 +39,15 @@ function subscriptions (key, options) {
 
       // last 30 days
       for (var i = 0; i <= 30; i += 1)
-        set(metrics, subscriptions, start, Dates.day.shift(today, -i));
+        set(metrics, subscriptions, plans, start, Dates.day.shift(today, -i));
       
       // last 52 weeks
       for (var i = 1; i <= 52; i += 1)
-        set(metrics, subscriptions, start, Dates.week.shift(today, -i));
+        set(metrics, subscriptions, plans, start, Dates.week.shift(today, -i));
 
       // last 10 years
       for (var i = 1; i <= 10; i += 1)
-        set(metrics, subscriptions, start, Dates.year.shift(today, -i));      
+        set(metrics, subscriptions, plans, start, Dates.year.shift(today, -i));      
     });
   };
 }
