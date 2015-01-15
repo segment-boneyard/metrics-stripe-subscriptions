@@ -37,6 +37,10 @@ function subscriptions (key, options) {
       var today = new Date();
       var start = new Date(0);
 
+      // last 24 hours
+      for (var i = 0; i <= 24; i += 1)
+        set(metrics, subscriptions, plans, start, Dates.hour.shift(today, -i));
+      
       // last 30 days
       for (var i = 0; i <= 30; i += 1)
         set(metrics, subscriptions, plans, start, Dates.day.shift(today, -i));
