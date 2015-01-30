@@ -1,3 +1,7 @@
+1.0.4 - January 30, 2015
+-------------------------
+- updating to new stripe-cohort
+
 1.0.3 - January 12, 2015
 -------------------------
 - adding hours to stripe subscriptions
